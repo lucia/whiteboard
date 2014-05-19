@@ -1,0 +1,22 @@
+extends layout
+block content
+  div(id="tools_drawer")
+    ul(id='button_interface')
+      li: label Pencil:&nbsp
+            select(name='pencil_size',onchange='setShapeSize(this)')
+              option(value=1)= 1
+              option(value=5)= 5
+              option(value=10)= 10
+              option(value=15)= 15
+      li: label Color:&nbsp
+            input(type='text',name='pencil_color',id='pencil_color',onchange='setShapeColor(this)')
+      li(class="tool-btn clear-btn", title="Clear")
+      li(class="tool-btn undo-btn", title="Undo")
+      li.last: a(href='javascript:;',onclick='saveWork()') Save
+    a(id= "show_hide_btn", href='javascript:;',onclick='showDrawer()') Show tools
+  div(id="canvas_holder"): canvas(id="draw")
+  script(type="text/paperscript", src="javascripts/draw.js", canvas="draw")
+  script
+    $("#pencil_color").spectrum({
+        color: "#000"
+    });

@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+#button_interface {
+  float: left;
+ /* width: 100%;*/
+  width: 120px;
+  list-style-type:none;
+}
+
+  #button_interface li {
+    float: left;
+    margin: 6px;
+    font-size: 12px;
+  }
+    #button_interface li a{
+      color:black;
+    }
+    #button_interface li.last{
+      clear: both;
+      font-size: 14px;
+    }
+    #button_interface li a {
+      float: left;
+    }
+    
+    #button_interface li.tool-btn {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    #button_interface li.undo-btn {
+      background: transparent url(../images/undo50x50btn.png) no-repeat scroll left top;
+    }
+    #button_interface li.clear-btn {
+      background: transparent url(../images/reset50x50btn.png) no-repeat scroll left top;
+    }
+
+#browser_list {
+  float: left;
+  width: 100%;
+  list-style-type:none;
+}
+
+  #browser_list li {
+    float: left; clear: left;
+    margin: 5px;
+  }
+    #browser_list li div {
+      float: left;
+      line-height: 148px;
+      margin-right: 10px;
+    }
+
+#canvas_holder {
+  text-align:center;
+}
+
+#tools_drawer {
+  background: url("../images/tools-drawer-bg.png") no-repeat scroll left top transparent;
+  height: 373px;
+  padding-left: 15px;
+  padding-top: 50px;
+  position: fixed;
+  width: 250px;
+  left: -186px;
+}
+
+  #tools_drawer #show_hide_btn {
+    border: 3px solid;
+    border-radius: 25px 25px 25px 25px;
+    box-shadow: 0 0 10px #000000;
+    color: black;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 111px;
+    padding: 2px 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 30px;
+    background-color: white;
+  }
