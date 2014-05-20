@@ -11,6 +11,11 @@ var express = require('express')
 
 var app = express();
 
+//define global vars to be used in templates
+app.locals.title = "Concurrent Drawing";
+app.locals.qrcodeUrl = "http://192.168.1.20:94";
+app.locals.siteUrl = "http://192.168.1.20:8000";
+
 // all environments
 app.set('port', process.env.PORT || 8000);
 app.set('views', __dirname + '/views');
