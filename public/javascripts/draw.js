@@ -1,6 +1,5 @@
 
 tool.maxDistance = 50;
-//var pathName = 0;
 /**
   * Return URL parameter By Name value
   * @param {string} name - name of the parameter we want to read the value for
@@ -30,14 +29,6 @@ function readAndAddImageToBackground() {
   
   img.onload = function() {
     var ratio = 1;
-   // var maxWidth = $('#draw').width();
-    //var maxHeight = $('#draw').height();
-
-    // if(img.width > maxWidth) {
-    //   ratio = maxWidth / img.width;
-    // } else if(img.height > maxHeight) {
-    //   ratio = maxHeight / img.height;
-    // }
     
    canvasPaper.width = img.width;
    canvasPaper.height = img.height;
@@ -50,68 +41,35 @@ function readAndAddImageToBackground() {
     raster.position.x = img.width*ratio/2;
     raster.position.y = img.height*ratio/2;
     project.layers[0].addChild(raster);
-    // view.draw();
   }
 }
 
 function onMouseDown(event) {
   segment = path = null;
 
-  // var hitResult = project.hitTest(event.point, hitOptions);
-  // if (!hitResult) {
-    switch (drawMode) {
-      case 'line':
-        path = new Path();
-        path.strokeColor = color;
-        path.strokeWidth = pencilSize;
-        // return;
-      break;
-      case 'circle':
-        path = null;
-        return;
-      break;
-      case 'rectangle':
-        path = null;
-        // return;
-      break;
-      case 'erase':
-        if (!path) {
-          var hitResult = project.hitTest(event.point, hitOptions);
-          if (hitResult) {
-            path = hitResult.item;
-            path.selected = true;
-          }
+  switch (drawMode) {
+    case 'line':
+      path = new Path();
+      path.strokeColor = color;
+      path.strokeWidth = pencilSize;
+    break;
+    case 'circle':
+      path = null;
+      return;
+    break;
+    case 'rectangle':
+      path = null;
+    break;
+    case 'erase':
+      if (!path) {
+        var hitResult = project.hitTest(event.point, hitOptions);
+        if (hitResult) {
+          path = hitResult.item;
+          path.selected = true;
         }
-        // return;
-      break;
-    }
-  // } else {
-  //   if (event.modifiers.shift) {
-  //     if (hitResult.type == 'segment') {
-  //       hitResult.segment.remove();
-  //     };
-  //     return;
-  //   }
-  // 
-  //   if (hitResult) {
-  //     path = hitResult.item;
-  //     if (hitResult.type == 'segment') {
-  //       segment = hitResult.segment;
-  //     } else if (hitResult.type == 'stroke') {
-  //       var location = hitResult.location;
-  //       segment = path.insert(location.index + 1, event.point);
-  //       path.smooth();
-  //     }
-  //     project.activeLayer.selected = false;
-  //     if (event.item)
-  //       event.item.selected = true;
-  //   }
-  //   movePath = hitResult.type == 'fill';
-  //   if (movePath)
-  //     project.activeLayer.addChild(hitResult.item);        
-  //   
-  // }
-  
+      }
+    break;
+  }
 }
 
 function onMouseUp(event) {
@@ -157,7 +115,7 @@ function onMouseUp(event) {
       } else {
         pathName ++;
       }
-      path.name = pathName.toString();
+      path.name = '_' + pathName.toString();
   }
 
   var x = event.middlePoint.x;
@@ -168,7 +126,7 @@ function onMouseUp(event) {
     auxName = auxPath.name;
   }
 
-  emitPath(x, y, path, drawMode, auxName)//, color);
+  emitPath(x, y, path, drawMode, auxName);
 
   return;
 }
@@ -184,21 +142,8 @@ function onMouseDrag(event) {
   } else {
     if (drawMode == 'line') {
       path.add(event.point);
-    }/* else if (drawMode == 'erase') {
-      if (path != null) {
-        if (path.getSegments().length > 0) {
-          path.removeSegment(path.getSegments().length-1);
-        } else {
-          path = null;
-        }
-      }
-      
-      return;
-    }*/
+    }
   }
-  //drawOnCanvas( event.middlePoint.x, event.middlePoint.y, path, color , "sender");
-
- // emitPath(event.middlePoint.x, event.middlePoint.y, path, drawMode, (pathName + 1).toString());//, color);
 }
 
 function drawOnCanvas (x, y, p, drawMode, name) {
@@ -227,7 +172,6 @@ function drawOnCanvas (x, y, p, drawMode, name) {
     break;
   }
   
-  
   if(drawMode != "erase") {
     path.name = name;
     path.segments = p[1].segments;
@@ -241,7 +185,7 @@ function drawOnCanvas (x, y, p, drawMode, name) {
   view.draw();
 }
 
-function emitPath( x, y, thepath, drawMode, name) {//, thecolor ) {
+function emitPath( x, y, thepath, drawMode, name) {
   // Each Socket.IO connection has a unique session id
   var sessionId = io.socket.sessionid;
   // An object to describe the circle's draw data
@@ -259,8 +203,6 @@ function emitPath( x, y, thepath, drawMode, name) {//, thecolor ) {
 
 // Listen for 'drawOnCanvas' events created by other users
 io.on( 'drawOnCanvas', function( data ) {
-//  console.log('IO on draw', data );
-
   // Draw the circle using the data sent
   // from another user
 
@@ -269,7 +211,6 @@ io.on( 'drawOnCanvas', function( data ) {
 
 
 io.on('clearCanvas', function(data){
- // clearCanvas();
  var activeLayer = project.activeLayer;
  for (var i = 1; i < activeLayer.children.length; i++) {
     activeLayer.children[i].visible = false;
