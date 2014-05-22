@@ -63,6 +63,10 @@ a {
   text-align:center;
 }
 
+canvas#draw {
+  border: 2px solid black;
+}
+
 #tools_drawer {
   background: url("../images/tools-drawer-bg.png") no-repeat scroll left top transparent;
   height: 373px;

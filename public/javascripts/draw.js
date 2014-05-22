@@ -28,6 +28,7 @@ function readAndAddImageToBackground() {
   img.id = 'background';
   
   img.onload = function() {
+    view.viewSize = new Size(img.width, img.height);
     var ratio = 1;
     
    canvasPaper.width = img.width;
