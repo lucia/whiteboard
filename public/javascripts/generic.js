@@ -36,7 +36,6 @@ function setShapeColor(shapeColor) {
 function setText(textToAdd) {
   if ($(textToAdd).val()) {
     enterDrawMode('text');
-    console.log('My Text ', $(textToAdd).val());
     text = $(textToAdd).val();
   }
 }

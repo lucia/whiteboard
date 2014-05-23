@@ -120,7 +120,6 @@ function onMouseUp(event) {
         });
         resetInputText();
         path = canvasText;
-        console.log(event.point);
       }
     break;
   }
@@ -144,7 +143,6 @@ function onMouseUp(event) {
     auxName = auxPath.name;
   }
 
-  console.log(path);
   emitPath(x, y, path, drawMode, auxName);
 
   return;
@@ -190,7 +188,6 @@ function drawOnCanvas (x, y, p, drawMode, name) {
       }
     break;
     case 'text':
-    console.log(p[1]);
       path = new PointText(new Point(x, y));
       path.name = name;
       path.content = p[1].content;
