@@ -47,7 +47,6 @@ function readAndAddImageToBackground() {
 
 function onMouseDown(event) {
   segment = path = null;
-
   switch (drawMode) {
     case 'line':
       path = new Path();
@@ -69,6 +68,10 @@ function onMouseDown(event) {
           path.selected = true;
         }
       }
+    break;
+    case 'text':
+      path = null;
+      return;
     break;
   }
 }
@@ -106,13 +109,27 @@ function onMouseUp(event) {
         path = null;
       }
     break;
+    case 'text':
+      if (text) {
+        var canvasText = new PointText({
+          point: event.point,
+          content: text,
+          justification: 'center',
+          fontSize: 15,
+          fillColor: color
+        });
+        resetInputText();
+        path = canvasText;
+        console.log(event.point);
+      }
+    break;
   }
-  if(drawMode!= "erase") {
+  if (drawMode != "erase") {
       var children = project.activeLayer.children;
 
       if(typeof(children[children.length - 2].name) != 'undefined' ) {
         var lastChild = children[children.length - 2];
-        pathName = parseInt(lastChild.getName()) + 1;
+        pathName = parseInt(lastChild.getName().replace(/_/, '')) + 1;
       } else {
         pathName ++;
       }
@@ -127,6 +144,7 @@ function onMouseUp(event) {
     auxName = auxPath.name;
   }
 
+  console.log(path);
   emitPath(x, y, path, drawMode, auxName);
 
   return;
@@ -160,7 +178,7 @@ function drawOnCanvas (x, y, p, drawMode, name) {
       path = new Path.Rectangle();
     break;
     case "line":
-        path = new Path();
+      path = new Path();
     break;
     case "erase":
       var children = project.activeLayer.children;
@@ -170,6 +188,21 @@ function drawOnCanvas (x, y, p, drawMode, name) {
          child.removeSegments();
        }
       }
+    break;
+    case 'text':
+    console.log(p[1]);
+      path = new PointText(new Point(x, y));
+      path.name = name;
+      path.content = p[1].content;
+      path.fillColor = p[1].fillColor;
+      path.fontSize = p[1].fontSize;
+      path.justification = p[1].justification;
+      path.leading = p[1].leading;
+
+      view.draw();
+      enterDrawMode('line');
+      return;
+
     break;
   }
   

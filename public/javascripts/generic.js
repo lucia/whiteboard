@@ -15,7 +15,7 @@ var generatedPaths = new Array();
 
 var clearWork = false;
 
-var color = 'black', pencilSize = 1, drawMode = 'line', fill=true;
+var color = 'black', pencilSize = 1, drawMode = 'line', fill=true, text= '';
 //switch draw mode
 function enterDrawMode(modeType) {
   drawMode = modeType;
@@ -24,11 +24,28 @@ function enterDrawMode(modeType) {
 //change fill size
 function setShapeSize(shapeSize) {
   pencilSize = $(shapeSize).val();
+  enterDrawMode('line');
 }
 
 //change fill color
 function setShapeColor(shapeColor) {
   color = $(shapeColor).val();
+}
+
+//set text to place on canvas
+function setText(textToAdd) {
+  if ($(textToAdd).val()) {
+    enterDrawMode('text');
+    console.log('My Text ', $(textToAdd).val());
+    text = $(textToAdd).val();
+  }
+}
+
+function resetInputText() {
+  $('#text').val('');
+  text = '';
+  
+  $('#text').blur();
 }
 
 //export the image

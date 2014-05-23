@@ -10,6 +10,8 @@ block content
               option(value=15)= 15
       li: label Color:&nbsp
             input(type='text',name='pencil_color',id='pencil_color',onchange='setShapeColor(this)')
+      li: label Text:&nbsp
+            input(type='text',name='text',id='text',onkeyup='setText(this)',class='text')
       li(class="tool-btn clear-btn", title="Clear")
       li(class="tool-btn undo-btn", title="Undo")
       li.last: a(href='javascript:;',onclick='saveWork()') Save
