@@ -144,7 +144,9 @@ function onMouseUp(event) {
   }
 
   emitPath(x, y, path, drawMode, auxName);
-
+  if (drawMode == 'text') {
+    enterDrawMode('line');
+  }
   return;
 }
 
@@ -197,7 +199,6 @@ function drawOnCanvas (x, y, p, drawMode, name) {
       path.leading = p[1].leading;
 
       view.draw();
-      enterDrawMode('line');
       return;
 
     break;
