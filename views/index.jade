@@ -2,6 +2,10 @@ extends layout
 block content
   div(id="tools_drawer")
     ul(id='button_interface')
+      li
+        a(href='javascript:;',onclick='enterDrawMode("line")') Line
+        a(href='javascript:;',onclick='enterDrawMode("circle")') Circle
+        a(href='javascript:;',onclick='enterDrawMode("rectangle")') Rectangle
       li: label Pencil:&nbsp
             select(name='pencil_size',onchange='setShapeSize(this)')
               option(value=1)= 1

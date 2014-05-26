@@ -24,7 +24,6 @@ function enterDrawMode(modeType) {
 //change fill size
 function setShapeSize(shapeSize) {
   pencilSize = $(shapeSize).val();
-  enterDrawMode('line');
 }
 
 //change fill color

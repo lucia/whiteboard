@@ -84,21 +84,22 @@ function onMouseUp(event) {
     break;
     case 'circle':
       var radius = event.delta.length / 2;
-      path = new Path.Circle(event.middlePoint, radius);
-      if (fill) {
-        path.fillColor = color;
+      if (radius == 0) {
+        radius = 10;
       }
+      path = new Path.Circle(event.middlePoint, radius);
       path.strokeColor = color;
       path.strokeWidth = pencilSize;
     break;
     case 'rectangle':
+      var delta = event.delta.length;
+      if (delta == 0) {
+        delta = 10;
+      }
       path = new Path.Rectangle({
         from: event.middlePoint,
-        to: (event.middlePoint + event.delta.length)
+        to: (event.middlePoint + delta)
       });
-      if (fill) {
-        path.fillColor = color;
-      }
       path.strokeColor = color;
       path.strokeWidth = pencilSize;
     break;

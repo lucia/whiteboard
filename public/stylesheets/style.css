@@ -14,10 +14,12 @@ a {
   width: 120px;
   list-style-type:none;
 }
-
+  #button_interface li:first-child {
+    margin-left: -6px;
+  }
   #button_interface li {
     float: left;
-    margin: 6px;
+    margin: 5px;
     font-size: 12px;
   }
     #button_interface li a{
@@ -29,6 +31,7 @@ a {
     }
     #button_interface li a {
       float: left;
+      margin-right: 3px;
     }
     
     #button_interface li.tool-btn {
