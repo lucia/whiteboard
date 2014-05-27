@@ -129,11 +129,14 @@ function onMouseUp(event) {
 
       if(typeof(children[children.length - 2].name) != 'undefined' ) {
         var lastChild = children[children.length - 2];
-        pathName = parseInt(lastChild.getName().replace(/_/, '')) + 1;
+        var name = lastChild.name.toString();
+        pathName = parseInt(name.replace(/_/, '')) + 1;
       } else {
         pathName ++;
       }
-      path.name = '_' + pathName.toString();
+
+      pathName = '_' + pathName.toString();
+      path.name = pathName;
   }
 
   var x = event.middlePoint.x;
