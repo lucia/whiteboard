@@ -63,6 +63,9 @@ a {
       line-height: 148px;
       margin-right: 10px;
     }
+    #browser_list li a, #browser_list li img {
+      float: left;
+    }
 
 #canvas_holder {
   text-align:center;
